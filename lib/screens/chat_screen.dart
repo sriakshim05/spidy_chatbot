@@ -9,12 +9,50 @@ class Chartscreen extends StatefulWidget {
 }
 
 class _ChartscreenState extends State<Chartscreen> {
+  final TextEditingController _controller=TextEditingController();
+  final List<String> messages=[];
+  void sendMessage(){
+    String text= _controller.text.trim();
+    if(text.isNotEmpty){
+      setState(() {
+        messages.add(text);
+      });
+      _controller.clear();
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          title: Text('Spidy Chat',selectionColor: Colors.black,),
+          centerTitle:true,
+          backgroundColor:Colors.redAccent,
+           leading: IconButton(icon:Icon(Icons.menu,color: Colors.black,),onPressed: () {
+            print("Menu clicked");
+          },),
+         actions: [
+          IconButton( icon:Icon(Icons.account_circle,color: Colors.black,),onPressed:(){
+            print("contact press");
+          },
+          )
+         ],
           
-      ),
+        ),
+        body:Column(
+          children: [
+            Expanded(child: ListView.builder(
+              padding: const.EdgeInsets.all(10),
+              itemCount:messages.length,
+              
+            ))
+          ],
+        )
+
+
+        
+        
       );
     
   }
